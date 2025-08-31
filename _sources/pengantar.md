@@ -1,55 +1,33 @@
-# Markdown Files
+# Pengantar PSD
 
-Whether you write your book's content in Jupyter Notebooks (`.ipynb`) or
-in regular markdown files (`.md`), you'll write in the same flavor of markdown
-called **MyST Markdown**.
-This is a simple file to help you get started and show off some syntax.
+Sains data merupakan disiplin interdisipliner yang berfokus pada pengolahan, analisis, dan interpretasi data dalam jumlah besar untuk menghasilkan informasi yang bernilai. Dalam konteks proyek akademik maupun industri, sains data dipandang sebagai pendekatan sistematis untuk menyelesaikan masalah berbasis data dengan menggabungkan teori statistik, komputasi, serta pemahaman bisnis yang relevan.
 
-## What is MyST?
+## Pentingnya Proyek Sains Data
 
-MyST stands for "Markedly Structured Text". It
-is a slight variation on a flavor of markdown called "CommonMark" markdown,
-with small syntax extensions to allow you to write **roles** and **directives**
-in the Sphinx ecosystem.
+Perusahaan dan organisasi modern dihadapkan pada tantangan berupa ledakan data dari transaksi digital, sensor IoT, media sosial, maupun sistem informasi internal. Tanpa pendekatan yang tepat, data hanya menjadi big data yang tidak memberikan manfaat nyata. Proyek sains data hadir untuk mengubah data tersebut menjadi wawasan strategis yang dapat:
+- Membantu pengambilan keputusan berbasis bukti (evidence-based decision making).
+- Meningkatkan efisiensi operasional dan kualitas produk.
+- Memperkirakan risiko (misalnya credit risk modeling).
+- Memahami perilaku pelanggan dan tren pasar.
+- Memprediksi fenomena masa depan seperti permintaan, harga, atau potensi bencana.
 
-For more about MyST, see [the MyST Markdown Overview](https://jupyterbook.org/content/myst.html).
+## Kerangka Teoretis
 
-## Sample Roles and Directives
+Proyek sains data biasanya mengacu pada metodologi standar internasional seperti CRISP-DM (Cross Industry Standard Process for Data Mining) yang terdiri dari enam fase:
 
-Roles and directives are two of the most powerful tools in Jupyter Book. They
-are like functions, but written in a markup language. They both
-serve a similar purpose, but **roles are written in one line**, whereas
-**directives span many lines**. They both accept different kinds of inputs,
-and what they do with those inputs depends on the specific role or directive
-that is being called.
+-Business Understanding – Identifikasi tujuan bisnis dan masalah yang ingin dipecahkan.
+-Data Understanding – Eksplorasi, deskripsi, dan verifikasi kualitas data.
+-Data Preparation – Pembersihan, transformasi, dan rekayasa fitur.
+-Modeling – Pembangunan model prediksi atau deskriptif dengan algoritma statistik maupun machine learning.
+-Evaluation – Pengukuran performa model dengan metrik internasional seperti akurasi, RMSE, atau silhouette coefficient.
+-Deployment – Implementasi model ke sistem operasional agar memberikan nilai bisnis nyata.
 
-Here is a "note" directive:
+Kerangka ini bersifat empiris, sistematis, dan logis karena setiap tahap saling terkait dan dapat dievaluasi ulang bila terjadi kekurangan.
 
-```{note}
-Here is a note
-```
+## Relevansi Isu Terkini
 
-It will be rendered in a special box when you build your book.
+Isu spesifik yang menjadi sorotan saat ini adalah pemodelan risiko kredit (credit risk modeling). Dengan meningkatnya transaksi digital dan inklusi keuangan, perusahaan perlu sistem prediksi yang andal untuk menentukan kelayakan pemberian pinjaman. Proyek sains data memungkinkan pengembangan model berbasis machine learning yang mampu memprediksi probabilitas gagal bayar dengan akurasi tinggi, sekaligus mendukung kebijakan finansial yang lebih adil dan efisien.
 
-Here is an inline directive to refer to a document: {doc}`markdown-notebooks`.
+## Kontribusi Empiris
 
-
-## Citations
-
-You can also cite references that are stored in a `bibtex` file. For example,
-the following syntax: `` {cite}`holdgraf_evidence_2014` `` will render like
-this: {cite}`holdgraf_evidence_2014`.
-
-Moreover, you can insert a bibliography into your page with this syntax:
-The `{bibliography}` directive must be used for all the `{cite}` roles to
-render properly.
-For example, if the references for your book are stored in `references.bib`,
-then the bibliography is inserted with:
-
-```{bibliography}
-```
-
-## Learn more
-
-This is just a simple starter to get you started.
-You can learn a lot more at [jupyterbook.org](https://jupyterbook.org).
+Proyek sains data tidak hanya berlandaskan teori, tetapi juga menekankan eksperimen empiris melalui analisis dataset nyata (misalnya data pelanggan, transaksi, atau data publik dari Kaggle). Hasilnya dapat diverifikasi menggunakan metrik yang baku, sehingga temuan bersifat objektif dan dapat dipertanggungjawabkan.
