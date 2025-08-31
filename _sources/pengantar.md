@@ -15,12 +15,12 @@ Perusahaan dan organisasi modern dihadapkan pada tantangan berupa ledakan data d
 
 Proyek sains data biasanya mengacu pada metodologi standar internasional seperti CRISP-DM (Cross Industry Standard Process for Data Mining) yang terdiri dari enam fase:
 
--Business Understanding – Identifikasi tujuan bisnis dan masalah yang ingin dipecahkan.
--Data Understanding – Eksplorasi, deskripsi, dan verifikasi kualitas data.
--Data Preparation – Pembersihan, transformasi, dan rekayasa fitur.
--Modeling – Pembangunan model prediksi atau deskriptif dengan algoritma statistik maupun machine learning.
--Evaluation – Pengukuran performa model dengan metrik internasional seperti akurasi, RMSE, atau silhouette coefficient.
--Deployment – Implementasi model ke sistem operasional agar memberikan nilai bisnis nyata.
+- Business Understanding – Identifikasi tujuan bisnis dan masalah yang ingin dipecahkan.
+- Data Understanding – Eksplorasi, deskripsi, dan verifikasi kualitas data.
+- Data Preparation – Pembersihan, transformasi, dan rekayasa fitur.
+- Modeling – Pembangunan model prediksi atau deskriptif dengan algoritma statistik maupun machine learning.
+- Evaluation – Pengukuran performa model dengan metrik internasional seperti akurasi, RMSE, atau silhouette coefficient.
+- Deployment – Implementasi model ke sistem operasional agar memberikan nilai bisnis nyata.
 
 Kerangka ini bersifat empiris, sistematis, dan logis karena setiap tahap saling terkait dan dapat dievaluasi ulang bila terjadi kekurangan.
 
