@@ -1,4 +1,4 @@
-# Pengantar PSD
+# Memahami Bisnis
 
 Sains data merupakan disiplin interdisipliner yang berfokus pada pengolahan, analisis, dan interpretasi data dalam jumlah besar untuk menghasilkan informasi yang bernilai. Dalam konteks proyek akademik maupun industri, sains data dipandang sebagai pendekatan sistematis untuk menyelesaikan masalah berbasis data dengan menggabungkan teori statistik, komputasi, serta pemahaman bisnis yang relevan.
 
