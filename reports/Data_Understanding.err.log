@@ -28,7 +28,6 @@ nbclient.exceptions.CellExecutionError: An error occurred while executing the fo
 # === 1. Import library ===
 import pandas as pd
 import matplotlib.pyplot as plt
-from google.colab import files
 
 # === 2. Upload semua CSV dari Power BI ===
 print("Upload semua file CSV")
@@ -72,15 +71,18 @@ else:
 
 ------------------
 
+----- stdout -----
+Upload semua file CSV
+------------------
 
 [31m---------------------------------------------------------------------------[39m
-[31mModuleNotFoundError[39m                       Traceback (most recent call last)
-[36mCell[39m[36m [39m[32mIn[1][39m[32m, line 4[39m
-[32m      2[39m [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01mpandas[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[34;01mpd[39;00m
-[32m      3[39m [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01mmatplotlib[39;00m[34;01m.[39;00m[34;01mpyplot[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[34;01mplt[39;00m
-[32m----> [39m[32m4[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01mgoogle[39;00m[34;01m.[39;00m[34;01mcolab[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m files
-[32m      6[39m [38;5;66;03m# === 2. Upload semua CSV dari Power BI ===[39;00m
-[32m      7[39m [38;5;28mprint[39m([33m"[39m[33mUpload semua file CSV[39m[33m"[39m)
+[31mNameError[39m                                 Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[1][39m[32m, line 7[39m
+[32m      5[39m [38;5;66;03m# === 2. Upload semua CSV dari Power BI ===[39;00m
+[32m      6[39m [38;5;28mprint[39m([33m"[39m[33mUpload semua file CSV[39m[33m"[39m)
+[32m----> [39m[32m7[39m uploaded = [43mfiles[49m.upload()
+[32m      9[39m [38;5;66;03m# === 3. Gabungkan semua CSV ===[39;00m
+[32m     10[39m file_names = [38;5;28mlist[39m(uploaded.keys())
 
-[31mModuleNotFoundError[39m: No module named 'google'
+[31mNameError[39m: name 'files' is not defined
 
