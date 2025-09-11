@@ -392,12 +392,10 @@ document.write(`
 <span class="k">try</span><span class="p">:</span>
     <span class="c1"># Kalau di Colab</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">google.colab</span><span class="w"> </span><span class="kn">import</span> <span class="n">files</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✔ Running on Google Colab - Silakan upload semua file CSV&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Upload semua file CSV&quot;</span><span class="p">)</span>
     <span class="n">uploaded</span> <span class="o">=</span> <span class="n">files</span><span class="o">.</span><span class="n">upload</span><span class="p">()</span>
     <span class="n">file_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">uploaded</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
 <span class="k">except</span> <span class="ne">ModuleNotFoundError</span><span class="p">:</span>
-    <span class="c1"># Kalau di lokal</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✔ Not running on Colab - Baca file CSV dari folder lokal&quot;</span><span class="p">)</span>
     <span class="c1"># Ganti dengan daftar file CSV kamu di lokal</span>
     <span class="n">file_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;PetalLength.csv&quot;</span><span class="p">,</span> <span class="s2">&quot;PetalWidth.csv&quot;</span><span class="p">,</span> <span class="s2">&quot;SepalLength.csv&quot;</span><span class="p">,</span> <span class="s2">&quot;SepalWidth.csv&quot;</span><span class="p">,</span> <span class="s2">&quot;Species.csv&quot;</span><span class="p">]</span>
 
@@ -439,9 +437,6 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>✔ Not running on Colab - Baca file CSV dari folder lokal
-</pre></div>
-</div>
 <img alt="_images/a168e45a8f54ce74f9d428a787beee4d9469a7dcf889588a6cf515a68e90cdd0.png" src="_images/a168e45a8f54ce74f9d428a787beee4d9469a7dcf889588a6cf515a68e90cdd0.png" />
 <img alt="_images/adad7a48bceeb4b4ec219c539be9388c68bb3ce2c3b1f13139d79909edae1765.png" src="_images/adad7a48bceeb4b4ec219c539be9388c68bb3ce2c3b1f13139d79909edae1765.png" />
 <img alt="_images/2ac039050b6c4838e8caefe77d6b5a244efb1a62c0a4275f45c6d2accfb98406.png" src="_images/2ac039050b6c4838e8caefe77d6b5a244efb1a62c0a4275f45c6d2accfb98406.png" />
