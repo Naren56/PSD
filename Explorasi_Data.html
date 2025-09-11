@@ -387,14 +387,21 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># === 1. Import library ===</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">google.colab</span><span class="w"> </span><span class="kn">import</span> <span class="n">files</span>
 
 <span class="c1"># === 2. Upload semua CSV dari Power BI ===</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Upload semua file CSV&quot;</span><span class="p">)</span>
-<span class="n">uploaded</span> <span class="o">=</span> <span class="n">files</span><span class="o">.</span><span class="n">upload</span><span class="p">()</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="c1"># Kalau di Colab</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">google.colab</span><span class="w"> </span><span class="kn">import</span> <span class="n">files</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✔ Running on Google Colab - Silakan upload semua file CSV&quot;</span><span class="p">)</span>
+    <span class="n">uploaded</span> <span class="o">=</span> <span class="n">files</span><span class="o">.</span><span class="n">upload</span><span class="p">()</span>
+    <span class="n">file_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">uploaded</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="k">except</span> <span class="ne">ModuleNotFoundError</span><span class="p">:</span>
+    <span class="c1"># Kalau di lokal</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✔ Not running on Colab - Baca file CSV dari folder lokal&quot;</span><span class="p">)</span>
+    <span class="c1"># Ganti dengan daftar file CSV kamu di lokal</span>
+    <span class="n">file_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;PetalLength.csv&quot;</span><span class="p">,</span> <span class="s2">&quot;PetalWidth.csv&quot;</span><span class="p">,</span> <span class="s2">&quot;SepalLength.csv&quot;</span><span class="p">,</span> <span class="s2">&quot;SepalWidth.csv&quot;</span><span class="p">,</span> <span class="s2">&quot;Species.csv&quot;</span><span class="p">]</span>
 
 <span class="c1"># === 3. Gabungkan semua CSV ===</span>
-<span class="n">file_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">uploaded</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
 <span class="n">dfs</span> <span class="o">=</span> <span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">file_names</span><span class="p">]</span>
 <span class="n">df_all</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">dfs</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
@@ -432,18 +439,23 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="ne">----&gt; </span><span class="mi">4</span> <span class="kn">from</span><span class="w"> </span><span class="nn">google.colab</span><span class="w"> </span><span class="kn">import</span> <span class="n">files</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="c1"># === 2. Upload semua CSV dari Power BI ===</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Upload semua file CSV&quot;</span><span class="p">)</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;google&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>✔ Not running on Colab - Baca file CSV dari folder lokal
 </pre></div>
 </div>
+<img alt="_images/a168e45a8f54ce74f9d428a787beee4d9469a7dcf889588a6cf515a68e90cdd0.png" src="_images/a168e45a8f54ce74f9d428a787beee4d9469a7dcf889588a6cf515a68e90cdd0.png" />
+<img alt="_images/adad7a48bceeb4b4ec219c539be9388c68bb3ce2c3b1f13139d79909edae1765.png" src="_images/adad7a48bceeb4b4ec219c539be9388c68bb3ce2c3b1f13139d79909edae1765.png" />
+<img alt="_images/2ac039050b6c4838e8caefe77d6b5a244efb1a62c0a4275f45c6d2accfb98406.png" src="_images/2ac039050b6c4838e8caefe77d6b5a244efb1a62c0a4275f45c6d2accfb98406.png" />
+<img alt="_images/2e74357248d9f46cbe509def63c21737c18becf554ebf05a00b2e884ec788bbb.png" src="_images/2e74357248d9f46cbe509def63c21737c18becf554ebf05a00b2e884ec788bbb.png" />
+<img alt="_images/509f12a259ca063ed80110eb2cfb7670245553374ffb920acad11b3fe413971e.png" src="_images/509f12a259ca063ed80110eb2cfb7670245553374ffb920acad11b3fe413971e.png" />
+<img alt="_images/5c87c75fd8a71f5670668016ed8c43c0ee3a1a857133cd0120ab365fd45827a3.png" src="_images/5c87c75fd8a71f5670668016ed8c43c0ee3a1a857133cd0120ab365fd45827a3.png" />
+<img alt="_images/ba5a078baff991620b6317f416b3f8672f288608ca624e6e4450ba173dbf6456.png" src="_images/ba5a078baff991620b6317f416b3f8672f288608ca624e6e4450ba173dbf6456.png" />
+<img alt="_images/9c2732da60bc329a47c24628d2702dd3ce25fbb37ea58fb281c94617930c4a26.png" src="_images/9c2732da60bc329a47c24628d2702dd3ce25fbb37ea58fb281c94617930c4a26.png" />
+<img alt="_images/59593db7f94471b2a99563f00ce39d3695850a9ec7ef8375237088d85c657f73.png" src="_images/59593db7f94471b2a99563f00ce39d3695850a9ec7ef8375237088d85c657f73.png" />
+<img alt="_images/bf5924178cbed5f67e89b626830efc8a7ddc38ae2a5e6d0f66c91851fa06ef86.png" src="_images/bf5924178cbed5f67e89b626830efc8a7ddc38ae2a5e6d0f66c91851fa06ef86.png" />
+<img alt="_images/b1c07dc67de45ff47944e69eb6da10b9ff039578c42260e9849ffe7a33a5cd72.png" src="_images/b1c07dc67de45ff47944e69eb6da10b9ff039578c42260e9849ffe7a33a5cd72.png" />
+<img alt="_images/b54e11d1ac39880635c1cb7b2ce96417e1f7914e922a6a3d8ba0f48f230940f8.png" src="_images/b54e11d1ac39880635c1cb7b2ce96417e1f7914e922a6a3d8ba0f48f230940f8.png" />
+<img alt="_images/8e4e3f2796e2e1adf9ffaa421635e24dad7b5f84b60f99618735b621d4b49c48.png" src="_images/8e4e3f2796e2e1adf9ffaa421635e24dad7b5f84b60f99618735b621d4b49c48.png" />
+<img alt="_images/9d31a94e95be7725d68f77ce6b63beac96885d118393fcebd41e7547ac0caa2d.png" src="_images/9d31a94e95be7725d68f77ce6b63beac96885d118393fcebd41e7547ac0caa2d.png" />
 </div>
 </div>
 </section>
