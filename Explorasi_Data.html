@@ -183,6 +183,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Business_Understanding.html">Business Understanding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Data_Understanding.html">Data Understanding</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Explorasi Data</a></li>
+
 </ul>
 
     </div>
@@ -355,7 +356,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -371,6 +374,16 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Explorasi Data</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sepal-petal">Sepal_Petal</a></li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -388,69 +401,338 @@ document.write(`
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
-<span class="c1"># === 2. Upload semua CSV dari Power BI ===</span>
-<span class="k">try</span><span class="p">:</span>
-    <span class="c1"># Kalau di Colab</span>
-    <span class="kn">from</span><span class="w"> </span><span class="nn">google.colab</span><span class="w"> </span><span class="kn">import</span> <span class="n">files</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Upload semua file CSV&quot;</span><span class="p">)</span>
-    <span class="n">uploaded</span> <span class="o">=</span> <span class="n">files</span><span class="o">.</span><span class="n">upload</span><span class="p">()</span>
-    <span class="n">file_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">uploaded</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-<span class="k">except</span> <span class="ne">ModuleNotFoundError</span><span class="p">:</span>
-    <span class="c1"># Ganti dengan daftar file CSV kamu di lokal</span>
-    <span class="n">file_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;PetalLength.csv&quot;</span><span class="p">,</span> <span class="s2">&quot;PetalWidth.csv&quot;</span><span class="p">,</span> <span class="s2">&quot;SepalLength.csv&quot;</span><span class="p">,</span> <span class="s2">&quot;SepalWidth.csv&quot;</span><span class="p">,</span> <span class="s2">&quot;Species.csv&quot;</span><span class="p">]</span>
+<span class="c1"># === 2. Daftar CSV ===</span>
+<span class="n">file_names</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;Data/PetalLength.csv&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Data/PetalWidth.csv&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Data/SepalLength.csv&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Data/SepalWidth.csv&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Data/Species.csv&quot;</span>
+<span class="p">]</span>
 
-<span class="c1"># === 3. Gabungkan semua CSV ===</span>
-<span class="n">dfs</span> <span class="o">=</span> <span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">file_names</span><span class="p">]</span>
-<span class="n">df_all</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">dfs</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># === 3. Loop setiap CSV ===</span>
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">file_names</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Isi file: </span><span class="si">{</span><span class="n">f</span><span class="si">}</span><span class="s2"> ===&quot;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>  <span class="c1"># tampilkan isi CSV di tabel Jupyter</span>
+    
+    <span class="c1"># === Buat chart ===</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 
-<span class="c1"># === 4. Chart Min, Max, Mean per kolom (pisah) ===</span>
-<span class="n">num_cols</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df_all</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">col</span> <span class="o">!=</span> <span class="s2">&quot;Species&quot;</span><span class="p">]</span>
+    <span class="c1"># Kalau kolom numerik → bar chart nilainya</span>
+    <span class="k">if</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;number&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">col</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#1f77b4&quot;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Chart </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Row Index&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
 
-<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">num_cols</span><span class="p">:</span>
-    <span class="n">min_val</span> <span class="o">=</span> <span class="n">df_all</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
-    <span class="n">max_val</span> <span class="o">=</span> <span class="n">df_all</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
-    <span class="n">mean_val</span> <span class="o">=</span> <span class="n">df_all</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="c1"># Kalau kolom kategori (misalnya Species) → hitung frekuensi</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">col</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">kelas_count</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">kelas_count</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">kelas_count</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#ff7f0e&quot;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Chart </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Count&quot;</span><span class="p">)</span>
 
-    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">([</span><span class="s2">&quot;Min&quot;</span><span class="p">,</span> <span class="s2">&quot;Max&quot;</span><span class="p">,</span> <span class="s2">&quot;Mean&quot;</span><span class="p">],</span> <span class="p">[</span><span class="n">min_val</span><span class="p">,</span> <span class="n">max_val</span><span class="p">,</span> <span class="n">mean_val</span><span class="p">],</span>
-            <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;#1f77b4&quot;</span><span class="p">,</span> <span class="s2">&quot;#ff7f0e&quot;</span><span class="p">,</span> <span class="s2">&quot;#2ca02c&quot;</span><span class="p">],</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Statistik </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Value&quot;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-
-<span class="c1"># === 5. Chart Jumlah Data per Species ===</span>
-<span class="k">if</span> <span class="s2">&quot;Species&quot;</span> <span class="ow">in</span> <span class="n">df_all</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
-    <span class="n">kelas_count</span> <span class="o">=</span> <span class="n">df_all</span><span class="p">[</span><span class="s2">&quot;Species&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
-
-    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
-    <span class="n">kelas_count</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;bar&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;#1f77b4&quot;</span><span class="p">,</span><span class="s2">&quot;#ff7f0e&quot;</span><span class="p">,</span><span class="s2">&quot;#2ca02c&quot;</span><span class="p">],</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Jumlah Data per Species&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Species&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Jumlah&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">⚠️ Kolom &#39;Species&#39; tidak ditemukan di data.&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/a168e45a8f54ce74f9d428a787beee4d9469a7dcf889588a6cf515a68e90cdd0.png" src="_images/a168e45a8f54ce74f9d428a787beee4d9469a7dcf889588a6cf515a68e90cdd0.png" />
-<img alt="_images/adad7a48bceeb4b4ec219c539be9388c68bb3ce2c3b1f13139d79909edae1765.png" src="_images/adad7a48bceeb4b4ec219c539be9388c68bb3ce2c3b1f13139d79909edae1765.png" />
-<img alt="_images/2ac039050b6c4838e8caefe77d6b5a244efb1a62c0a4275f45c6d2accfb98406.png" src="_images/2ac039050b6c4838e8caefe77d6b5a244efb1a62c0a4275f45c6d2accfb98406.png" />
-<img alt="_images/2e74357248d9f46cbe509def63c21737c18becf554ebf05a00b2e884ec788bbb.png" src="_images/2e74357248d9f46cbe509def63c21737c18becf554ebf05a00b2e884ec788bbb.png" />
-<img alt="_images/509f12a259ca063ed80110eb2cfb7670245553374ffb920acad11b3fe413971e.png" src="_images/509f12a259ca063ed80110eb2cfb7670245553374ffb920acad11b3fe413971e.png" />
-<img alt="_images/5c87c75fd8a71f5670668016ed8c43c0ee3a1a857133cd0120ab365fd45827a3.png" src="_images/5c87c75fd8a71f5670668016ed8c43c0ee3a1a857133cd0120ab365fd45827a3.png" />
-<img alt="_images/ba5a078baff991620b6317f416b3f8672f288608ca624e6e4450ba173dbf6456.png" src="_images/ba5a078baff991620b6317f416b3f8672f288608ca624e6e4450ba173dbf6456.png" />
-<img alt="_images/9c2732da60bc329a47c24628d2702dd3ce25fbb37ea58fb281c94617930c4a26.png" src="_images/9c2732da60bc329a47c24628d2702dd3ce25fbb37ea58fb281c94617930c4a26.png" />
-<img alt="_images/59593db7f94471b2a99563f00ce39d3695850a9ec7ef8375237088d85c657f73.png" src="_images/59593db7f94471b2a99563f00ce39d3695850a9ec7ef8375237088d85c657f73.png" />
-<img alt="_images/bf5924178cbed5f67e89b626830efc8a7ddc38ae2a5e6d0f66c91851fa06ef86.png" src="_images/bf5924178cbed5f67e89b626830efc8a7ddc38ae2a5e6d0f66c91851fa06ef86.png" />
-<img alt="_images/b1c07dc67de45ff47944e69eb6da10b9ff039578c42260e9849ffe7a33a5cd72.png" src="_images/b1c07dc67de45ff47944e69eb6da10b9ff039578c42260e9849ffe7a33a5cd72.png" />
-<img alt="_images/b54e11d1ac39880635c1cb7b2ce96417e1f7914e922a6a3d8ba0f48f230940f8.png" src="_images/b54e11d1ac39880635c1cb7b2ce96417e1f7914e922a6a3d8ba0f48f230940f8.png" />
-<img alt="_images/8e4e3f2796e2e1adf9ffaa421635e24dad7b5f84b60f99618735b621d4b49c48.png" src="_images/8e4e3f2796e2e1adf9ffaa421635e24dad7b5f84b60f99618735b621d4b49c48.png" />
-<img alt="_images/9d31a94e95be7725d68f77ce6b63beac96885d118393fcebd41e7547ac0caa2d.png" src="_images/9d31a94e95be7725d68f77ce6b63beac96885d118393fcebd41e7547ac0caa2d.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Isi file: Data/PetalLength.csv ===
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>PetalLength_Max</th>
+      <th>PetalLength_Min</th>
+      <th>PetalLength_Avg</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>6.9</td>
+      <td>1</td>
+      <td>3.758667</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><img alt="_images/b2eba5356fc18720c9e489d23bc70132abc886b03ab163d9f47ab1fad8632b6e.png" src="_images/b2eba5356fc18720c9e489d23bc70132abc886b03ab163d9f47ab1fad8632b6e.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Isi file: Data/PetalWidth.csv ===
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>PetalWidth_Avg</th>
+      <th>PetalWidth_Max</th>
+      <th>PetalWidth_Min</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.198667</td>
+      <td>2.5</td>
+      <td>0.1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><img alt="_images/cd4aa6457522522ff8d20d293fbcd263d2be14f3e2889ca7e124d9b9d47e413f.png" src="_images/cd4aa6457522522ff8d20d293fbcd263d2be14f3e2889ca7e124d9b9d47e413f.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Isi file: Data/SepalLength.csv ===
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>SepalLength_Avg</th>
+      <th>SepalLength_Max</th>
+      <th>SepalLength_Min</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5.843333</td>
+      <td>7.9</td>
+      <td>4.3</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><img alt="_images/8d0872e5b2f2f30b575d7b313031024719a4547422055adbed3fffac3a27c99c.png" src="_images/8d0872e5b2f2f30b575d7b313031024719a4547422055adbed3fffac3a27c99c.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Isi file: Data/SepalWidth.csv ===
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>SepalWidth_Avg</th>
+      <th>SepalWidth_Max</th>
+      <th>SepalWidth_Min</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>3.054</td>
+      <td>4.4</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><img alt="_images/d8b238ff83a18b98da49ff52fe6ccefe7545a406ba08830edd61fb7da6b23a4c.png" src="_images/d8b238ff83a18b98da49ff52fe6ccefe7545a406ba08830edd61fb7da6b23a4c.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Isi file: Data/Species.csv ===
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Species</th>
+      <th>Count of Species</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Iris-setosa</td>
+      <td>50</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Iris-versicolor</td>
+      <td>50</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Iris-virginica</td>
+      <td>50</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><img alt="_images/72e25b29c4c8bf3b574d3ff81bcdf435718db91a1d95b1d1d5e86189f1a1b334.png" src="_images/72e25b29c4c8bf3b574d3ff81bcdf435718db91a1d95b1d1d5e86189f1a1b334.png" />
+</div>
+</div>
+</section>
+<section id="sepal-petal">
+<h1>Sepal_Petal<a class="headerlink" href="#sepal-petal" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># === 1. Import library ===</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># === 2. Daftar CSV ===</span>
+<span class="n">file_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Data/Sepal_Petal.csv&quot;</span><span class="p">,</span> <span class="s2">&quot;Data/Petal_Sepal.csv&quot;</span><span class="p">]</span>
+
+<span class="c1"># === 3. Loop tiap CSV ===</span>
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">file_names</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Isi file: </span><span class="si">{</span><span class="n">f</span><span class="si">}</span><span class="s2"> ===&quot;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>  <span class="c1"># tampilkan tabel isi CSV</span>
+
+    <span class="c1"># Ambil semua kolom numerik</span>
+    <span class="n">num_cols</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;number&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+    <span class="c1"># === 1 Grafik per CSV ===</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">num_cols</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;bar&quot;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Grafik dari </span><span class="si">{</span><span class="n">f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Row Index&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Value&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Kolom&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Isi file: Data/Sepal_Petal.csv ===
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Jumlah sebesar sepal length</th>
+      <th>Jumlah sebesar sepal width</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>876.5</td>
+      <td>458.1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><img alt="_images/c4b4bc643824fdb4fddaa6d373931c9baad22bd37c1e68214752b603ca7b9203.png" src="_images/c4b4bc643824fdb4fddaa6d373931c9baad22bd37c1e68214752b603ca7b9203.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Isi file: Data/Petal_Sepal.csv ===
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Jumlah sebesar petal_length</th>
+      <th>Jumlah sebesar petal_width</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>563.8</td>
+      <td>179.8</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><img alt="_images/25570bcfdf3883b03f226927a295ded6909ad874e4a29a8bcceb81bfc63d4af9.png" src="_images/25570bcfdf3883b03f226927a295ded6909ad874e4a29a8bcceb81bfc63d4af9.png" />
 </div>
 </div>
 </section>
@@ -500,6 +782,23 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Explorasi Data</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sepal-petal">Sepal_Petal</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
               
             
           </div>
