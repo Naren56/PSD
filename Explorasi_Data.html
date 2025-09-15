@@ -695,7 +695,7 @@ document.write(`
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
 <span class="c1"># === 2. Daftar CSV ===</span>
-<span class="n">file_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Data/Sepal_Petal.csv&quot;</span><span class="p">,</span> <span class="s2">&quot;Data/Petal_Sepal.csv&quot;</span><span class="p">]</span>
+<span class="n">file_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Data/Sepal-Petal.csv&quot;</span><span class="p">,</span> <span class="s2">&quot;Data/Petal-Sepal.csv&quot;</span><span class="p">]</span>
 
 <span class="c1"># === 3. Loop tiap CSV ===</span>
 <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">file_names</span><span class="p">:</span>
@@ -718,7 +718,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Isi file: Data/Sepal_Petal.csv ===
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Isi file: Data/Sepal-Petal.csv ===
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -741,18 +741,32 @@ document.write(`
       <th></th>
       <th>Jumlah sebesar sepal length</th>
       <th>Jumlah sebesar sepal width</th>
+      <th>class</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>876.5</td>
-      <td>458.1</td>
+      <td>329.4</td>
+      <td>148.7</td>
+      <td>Iris-virginica</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>296.8</td>
+      <td>138.5</td>
+      <td>Iris-versicolor</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>250.3</td>
+      <td>170.9</td>
+      <td>Iris-setosa</td>
     </tr>
   </tbody>
 </table>
-</div></div><img alt="_images/c4b4bc643824fdb4fddaa6d373931c9baad22bd37c1e68214752b603ca7b9203.png" src="_images/c4b4bc643824fdb4fddaa6d373931c9baad22bd37c1e68214752b603ca7b9203.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Isi file: Data/Petal_Sepal.csv ===
+</div></div><img alt="_images/9f06def279d6adb7ddba4f47bdf3f5471a1819f97f19157b778b41e6dc983a98.png" src="_images/9f06def279d6adb7ddba4f47bdf3f5471a1819f97f19157b778b41e6dc983a98.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Isi file: Data/Petal-Sepal.csv ===
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -775,17 +789,31 @@ document.write(`
       <th></th>
       <th>Jumlah sebesar petal_length</th>
       <th>Jumlah sebesar petal_width</th>
+      <th>class</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>563.8</td>
-      <td>179.8</td>
+      <td>277.6</td>
+      <td>101.3</td>
+      <td>Iris-virginica</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>213.0</td>
+      <td>66.3</td>
+      <td>Iris-versicolor</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>73.2</td>
+      <td>12.2</td>
+      <td>Iris-setosa</td>
     </tr>
   </tbody>
 </table>
-</div></div><img alt="_images/25570bcfdf3883b03f226927a295ded6909ad874e4a29a8bcceb81bfc63d4af9.png" src="_images/25570bcfdf3883b03f226927a295ded6909ad874e4a29a8bcceb81bfc63d4af9.png" />
+</div></div><img alt="_images/9424cc7584a636cd0f4b633254708fcd16f246b82d1324f7466f38a600694ef9.png" src="_images/9424cc7584a636cd0f4b633254708fcd16f246b82d1324f7466f38a600694ef9.png" />
 </div>
 </div>
 </section>
