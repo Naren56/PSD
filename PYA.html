@@ -416,28 +416,6 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ConnectionRefusedError</span><span class="g g-Whitespace">                    </span>Traceback (most recent call last)
-<span class="nn">File /workspaces/PSD/ecoli-env/lib/python3.12/site-packages/pymysql/connections.py:661,</span> in <span class="ni">Connection.connect</span><span class="nt">(self, sock)</span>
-<span class="g g-Whitespace">    </span><span class="mi">660</span> <span class="k">try</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">661</span>     <span class="n">sock</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">create_connection</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">662</span>         <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">host</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">connect_timeout</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
-<span class="g g-Whitespace">    </span><span class="mi">663</span>     <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">664</span>     <span class="k">break</span>
-
-<span class="nn">File ~/.python/current/lib/python3.12/socket.py:852,</span> in <span class="ni">create_connection</span><span class="nt">(address, timeout, source_address, all_errors)</span>
-<span class="g g-Whitespace">    </span><span class="mi">851</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">all_errors</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">852</span>     <span class="k">raise</span> <span class="n">exceptions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="g g-Whitespace">    </span><span class="mi">853</span> <span class="k">raise</span> <span class="n">ExceptionGroup</span><span class="p">(</span><span class="s2">&quot;create_connection failed&quot;</span><span class="p">,</span> <span class="n">exceptions</span><span class="p">)</span>
-
-<span class="nn">File ~/.python/current/lib/python3.12/socket.py:837,</span> in <span class="ni">create_connection</span><span class="nt">(address, timeout, source_address, all_errors)</span>
-<span class="g g-Whitespace">    </span><span class="mi">836</span>     <span class="n">sock</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">source_address</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">837</span> <span class="n">sock</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">sa</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">838</span> <span class="c1"># Break explicitly a reference cycle</span>
-
-<span class="ne">ConnectionRefusedError</span>: [Errno 111] Connection refused
-
-<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
-
 <span class="ne">OperationalError</span><span class="g g-Whitespace">                          </span>Traceback (most recent call last)
 <span class="nn">File /workspaces/PSD/ecoli-env/lib/python3.12/site-packages/sqlalchemy/engine/base.py:143,</span> in <span class="ni">Connection.__init__</span><span class="nt">(self, engine, connection, _has_events, _allow_revalidate, _allow_autobegin)</span>
 <span class="g g-Whitespace">    </span><span class="mi">142</span> <span class="k">try</span><span class="p">:</span>
@@ -522,14 +500,35 @@ document.write(`
 <span class="g g-Whitespace">    </span><span class="mi">364</span> <span class="k">else</span><span class="p">:</span>
 <span class="ne">--&gt; </span><span class="mi">365</span>     <span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
 
-<span class="nn">File /workspaces/PSD/ecoli-env/lib/python3.12/site-packages/pymysql/connections.py:723,</span> in <span class="ni">Connection.connect</span><span class="nt">(self, sock)</span>
-<span class="g g-Whitespace">    </span><span class="mi">722</span>         <span class="nb">print</span><span class="p">(</span><span class="n">exc</span><span class="o">.</span><span class="n">traceback</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">723</span>     <span class="k">raise</span> <span class="n">exc</span>
-<span class="g g-Whitespace">    </span><span class="mi">725</span> <span class="c1"># If e is neither DatabaseError or IOError, It&#39;s a bug.</span>
-<span class="g g-Whitespace">    </span><span class="mi">726</span> <span class="c1"># But raising AssertionError hides original error.</span>
-<span class="g g-Whitespace">    </span><span class="mi">727</span> <span class="c1"># So just reraise it.</span>
+<span class="nn">File /workspaces/PSD/ecoli-env/lib/python3.12/site-packages/pymysql/connections.py:681,</span> in <span class="ni">Connection.connect</span><span class="nt">(self, sock)</span>
+<span class="g g-Whitespace">    </span><span class="mi">680</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_server_information</span><span class="p">()</span>
+<span class="ne">--&gt; </span><span class="mi">681</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request_authentication</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">683</span> <span class="c1"># Send &quot;SET NAMES&quot; query on init for:</span>
+<span class="g g-Whitespace">    </span><span class="mi">684</span> <span class="c1"># - Ensure charaset (and collation) is set to the server.</span>
+<span class="g g-Whitespace">    </span><span class="mi">685</span> <span class="c1">#   - collation_id in handshake packet may be ignored.</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>    <span class="mi">694</span> <span class="c1"># - https://github.com/wagtail/wagtail/issues/9477</span>
+<span class="g g-Whitespace">    </span><span class="mi">695</span> <span class="c1"># - https://zenn.dev/methane/articles/2023-mysql-collation (Japanese)</span>
 
-<span class="ne">OperationalError</span>: (2003, &quot;Can&#39;t connect to MySQL server on &#39;127.0.0.1&#39; ([Errno 111] Connection refused)&quot;)
+<span class="nn">File /workspaces/PSD/ecoli-env/lib/python3.12/site-packages/pymysql/connections.py:958,</span> in <span class="ni">Connection._request_authentication</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">957</span> <span class="bp">self</span><span class="o">.</span><span class="n">write_packet</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">958</span> <span class="n">auth_packet</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_packet</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">960</span> <span class="c1"># if authentication method isn&#39;t accepted the first byte</span>
+<span class="g g-Whitespace">    </span><span class="mi">961</span> <span class="c1"># will have the octet 254</span>
+
+<span class="nn">File /workspaces/PSD/ecoli-env/lib/python3.12/site-packages/pymysql/connections.py:782,</span> in <span class="ni">Connection._read_packet</span><span class="nt">(self, packet_type)</span>
+<span class="g g-Whitespace">    </span><span class="mi">781</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_result</span><span class="o">.</span><span class="n">unbuffered_active</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="ne">--&gt; </span><span class="mi">782</span>     <span class="n">packet</span><span class="o">.</span><span class="n">raise_for_error</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">783</span> <span class="k">return</span> <span class="n">packet</span>
+
+<span class="nn">File /workspaces/PSD/ecoli-env/lib/python3.12/site-packages/pymysql/protocol.py:219,</span> in <span class="ni">MysqlPacket.raise_for_error</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">218</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;errno =&quot;</span><span class="p">,</span> <span class="n">errno</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">219</span> <span class="n">err</span><span class="o">.</span><span class="n">raise_mysql_exception</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">)</span>
+
+<span class="nn">File /workspaces/PSD/ecoli-env/lib/python3.12/site-packages/pymysql/err.py:150,</span> in <span class="ni">raise_mysql_exception</span><span class="nt">(data)</span>
+<span class="g g-Whitespace">    </span><span class="mi">149</span>     <span class="n">errorclass</span> <span class="o">=</span> <span class="n">InternalError</span> <span class="k">if</span> <span class="n">errno</span> <span class="o">&lt;</span> <span class="mi">1000</span> <span class="k">else</span> <span class="n">OperationalError</span>
+<span class="ne">--&gt; </span><span class="mi">150</span> <span class="k">raise</span> <span class="n">errorclass</span><span class="p">(</span><span class="n">errno</span><span class="p">,</span> <span class="n">errval</span><span class="p">)</span>
+
+<span class="ne">OperationalError</span>: (1698, &quot;Access denied for user &#39;root&#39;@&#39;localhost&#39;&quot;)
 
 <span class="n">The</span> <span class="n">above</span> <span class="n">exception</span> <span class="n">was</span> <span class="n">the</span> <span class="n">direct</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">exception</span><span class="p">:</span>
 
@@ -706,16 +705,42 @@ document.write(`
 <span class="g g-Whitespace">    </span><span class="mi">364</span> <span class="k">else</span><span class="p">:</span>
 <span class="ne">--&gt; </span><span class="mi">365</span>     <span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
 
-<span class="nn">File /workspaces/PSD/ecoli-env/lib/python3.12/site-packages/pymysql/connections.py:723,</span> in <span class="ni">Connection.connect</span><span class="nt">(self, sock)</span>
-<span class="g g-Whitespace">    </span><span class="mi">721</span>     <span class="k">if</span> <span class="n">DEBUG</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">722</span>         <span class="nb">print</span><span class="p">(</span><span class="n">exc</span><span class="o">.</span><span class="n">traceback</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">723</span>     <span class="k">raise</span> <span class="n">exc</span>
-<span class="g g-Whitespace">    </span><span class="mi">725</span> <span class="c1"># If e is neither DatabaseError or IOError, It&#39;s a bug.</span>
-<span class="g g-Whitespace">    </span><span class="mi">726</span> <span class="c1"># But raising AssertionError hides original error.</span>
-<span class="g g-Whitespace">    </span><span class="mi">727</span> <span class="c1"># So just reraise it.</span>
-<span class="g g-Whitespace">    </span><span class="mi">728</span> <span class="k">raise</span>
+<span class="nn">File /workspaces/PSD/ecoli-env/lib/python3.12/site-packages/pymysql/connections.py:681,</span> in <span class="ni">Connection.connect</span><span class="nt">(self, sock)</span>
+<span class="g g-Whitespace">    </span><span class="mi">678</span> <span class="bp">self</span><span class="o">.</span><span class="n">_next_seq_id</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="g g-Whitespace">    </span><span class="mi">680</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_server_information</span><span class="p">()</span>
+<span class="ne">--&gt; </span><span class="mi">681</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request_authentication</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">683</span> <span class="c1"># Send &quot;SET NAMES&quot; query on init for:</span>
+<span class="g g-Whitespace">    </span><span class="mi">684</span> <span class="c1"># - Ensure charaset (and collation) is set to the server.</span>
+<span class="g g-Whitespace">    </span><span class="mi">685</span> <span class="c1">#   - collation_id in handshake packet may be ignored.</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>    <span class="mi">694</span> <span class="c1"># - https://github.com/wagtail/wagtail/issues/9477</span>
+<span class="g g-Whitespace">    </span><span class="mi">695</span> <span class="c1"># - https://zenn.dev/methane/articles/2023-mysql-collation (Japanese)</span>
+<span class="g g-Whitespace">    </span><span class="mi">696</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_character_set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">charset</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">collation</span><span class="p">)</span>
 
-<span class="ne">OperationalError</span>: (pymysql.err.OperationalError) (2003, &quot;Can&#39;t connect to MySQL server on &#39;127.0.0.1&#39; ([Errno 111] Connection refused)&quot;)
+<span class="nn">File /workspaces/PSD/ecoli-env/lib/python3.12/site-packages/pymysql/connections.py:958,</span> in <span class="ni">Connection._request_authentication</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">955</span>     <span class="n">data</span> <span class="o">+=</span> <span class="n">_lenenc_int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">connect_attrs</span><span class="p">))</span> <span class="o">+</span> <span class="n">connect_attrs</span>
+<span class="g g-Whitespace">    </span><span class="mi">957</span> <span class="bp">self</span><span class="o">.</span><span class="n">write_packet</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">958</span> <span class="n">auth_packet</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_packet</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">960</span> <span class="c1"># if authentication method isn&#39;t accepted the first byte</span>
+<span class="g g-Whitespace">    </span><span class="mi">961</span> <span class="c1"># will have the octet 254</span>
+<span class="g g-Whitespace">    </span><span class="mi">962</span> <span class="k">if</span> <span class="n">auth_packet</span><span class="o">.</span><span class="n">is_auth_switch_request</span><span class="p">():</span>
+
+<span class="nn">File /workspaces/PSD/ecoli-env/lib/python3.12/site-packages/pymysql/connections.py:782,</span> in <span class="ni">Connection._read_packet</span><span class="nt">(self, packet_type)</span>
+<span class="g g-Whitespace">    </span><span class="mi">780</span>     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_result</span><span class="o">.</span><span class="n">unbuffered_active</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">781</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_result</span><span class="o">.</span><span class="n">unbuffered_active</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="ne">--&gt; </span><span class="mi">782</span>     <span class="n">packet</span><span class="o">.</span><span class="n">raise_for_error</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">783</span> <span class="k">return</span> <span class="n">packet</span>
+
+<span class="nn">File /workspaces/PSD/ecoli-env/lib/python3.12/site-packages/pymysql/protocol.py:219,</span> in <span class="ni">MysqlPacket.raise_for_error</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">217</span> <span class="k">if</span> <span class="n">DEBUG</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">218</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;errno =&quot;</span><span class="p">,</span> <span class="n">errno</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">219</span> <span class="n">err</span><span class="o">.</span><span class="n">raise_mysql_exception</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">)</span>
+
+<span class="nn">File /workspaces/PSD/ecoli-env/lib/python3.12/site-packages/pymysql/err.py:150,</span> in <span class="ni">raise_mysql_exception</span><span class="nt">(data)</span>
+<span class="g g-Whitespace">    </span><span class="mi">148</span> <span class="k">if</span> <span class="n">errorclass</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">149</span>     <span class="n">errorclass</span> <span class="o">=</span> <span class="n">InternalError</span> <span class="k">if</span> <span class="n">errno</span> <span class="o">&lt;</span> <span class="mi">1000</span> <span class="k">else</span> <span class="n">OperationalError</span>
+<span class="ne">--&gt; </span><span class="mi">150</span> <span class="k">raise</span> <span class="n">errorclass</span><span class="p">(</span><span class="n">errno</span><span class="p">,</span> <span class="n">errval</span><span class="p">)</span>
+
+<span class="ne">OperationalError</span>: (pymysql.err.OperationalError) (1698, &quot;Access denied for user &#39;root&#39;@&#39;localhost&#39;&quot;)
 <span class="p">(</span><span class="n">Background</span> <span class="n">on</span> <span class="n">this</span> <span class="n">error</span> <span class="n">at</span><span class="p">:</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">sqlalche</span><span class="o">.</span><span class="n">me</span><span class="o">/</span><span class="n">e</span><span class="o">/</span><span class="mi">20</span><span class="o">/</span><span class="n">e3q8</span><span class="p">)</span>
 </pre></div>
 </div>
