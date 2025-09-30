@@ -60,11 +60,17 @@ dataset = df_all
 
 [31m---------------------------------------------------------------------------[39m
 [31mModuleNotFoundError[39m                       Traceback (most recent call last)
-[36mCell[39m[36m [39m[32mIn[2][39m[32m, line 2[39m
+[36mCell[39m[36m [39m[32mIn[2][39m[32m, line 3[39m
 [32m      1[39m [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01mpandas[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[34;01mpd[39;00m
-[32m----> [39m[32m2[39m [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01mmysql[39;00m[34;01m.[39;00m[34;01mconnector[39;00m
-[32m      3[39m [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01mpsycopg2[39;00m
+[32m      2[39m [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01mmysql[39;00m[34;01m.[39;00m[34;01mconnector[39;00m
+[32m----> [39m[32m3[39m [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01mpsycopg2[39;00m
 [32m      5[39m [38;5;66;03m# === MySQL ===[39;00m
+[32m      6[39m conn_mysql = mysql.connector.connect(
+[32m      7[39m     host=[33m"[39m[33mlocalhost[39m[33m"[39m,
+[32m      8[39m     user=[33m"[39m[33mroot[39m[33m"[39m,
+[32m      9[39m     password=[33m"[39m[33mpasswordku[39m[33m"[39m,
+[32m     10[39m     database=[33m"[39m[33mmydata[39m[33m"[39m
+[32m     11[39m )
 
-[31mModuleNotFoundError[39m: No module named 'mysql'
+[31mModuleNotFoundError[39m: No module named 'psycopg2'
 

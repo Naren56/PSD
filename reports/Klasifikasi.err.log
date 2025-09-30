@@ -25,68 +25,68 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-# Buat koneksi ke MySQL lokal
-engine = create_engine("mysql+pymysql://root:Kunci_12345@127.0.0.1:3306/ecoli_db", pool_pre_ping=True)
+engine = create_engine(
+    "mysql+pymysql://root:Kunci_12345@127.0.0.1:3306/ecoli_db",
+    pool_pre_ping=True
+)
 
-# Ambil dataset dari tabel MySQL
 df = pd.read_sql("SELECT * FROM ecoli", engine)
+print("Data awal:")
+print(df.head())
 
-print("Jumlah baris:", len(df))
-print("Distribusi kelas (asli):")
-print(df["class"].value_counts())
-df.head()
+engine.dispose()
 
 ------------------
 
 
 [31m---------------------------------------------------------------------------[39m
 [31mProgrammingError[39m                          Traceback (most recent call last)
-[36mFile [39m[32m/usr/local/python/3.12.1/lib/python3.12/site-packages/sqlalchemy/engine/base.py:1967[39m, in [36mConnection._exec_single_context[39m[34m(self, dialect, context, statement, parameters)[39m
+[36mFile [39m[32m/workspaces/PSD/ecoli-env/lib/python3.12/site-packages/sqlalchemy/engine/base.py:1967[39m, in [36mConnection._exec_single_context[39m[34m(self, dialect, context, statement, parameters)[39m
 [32m   1966[39m     [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m evt_handled:
 [32m-> [39m[32m1967[39m         [38;5;28;43mself[39;49m[43m.[49m[43mdialect[49m[43m.[49m[43mdo_execute[49m[43m([49m
 [32m   1968[39m [43m            [49m[43mcursor[49m[43m,[49m[43m [49m[43mstr_statement[49m[43m,[49m[43m [49m[43meffective_parameters[49m[43m,[49m[43m [49m[43mcontext[49m
 [32m   1969[39m [43m        [49m[43m)[49m
 [32m   1971[39m [38;5;28;01mif[39;00m [38;5;28mself[39m._has_events [38;5;129;01mor[39;00m [38;5;28mself[39m.engine._has_events:
 
-[36mFile [39m[32m/usr/local/python/3.12.1/lib/python3.12/site-packages/sqlalchemy/engine/default.py:951[39m, in [36mDefaultDialect.do_execute[39m[34m(self, cursor, statement, parameters, context)[39m
+[36mFile [39m[32m/workspaces/PSD/ecoli-env/lib/python3.12/site-packages/sqlalchemy/engine/default.py:951[39m, in [36mDefaultDialect.do_execute[39m[34m(self, cursor, statement, parameters, context)[39m
 [32m    950[39m [38;5;28;01mdef[39;00m[38;5;250m [39m[34mdo_execute[39m([38;5;28mself[39m, cursor, statement, parameters, context=[38;5;28;01mNone[39;00m):
 [32m--> [39m[32m951[39m     [43mcursor[49m[43m.[49m[43mexecute[49m[43m([49m[43mstatement[49m[43m,[49m[43m [49m[43mparameters[49m[43m)[49m
 
-[36mFile [39m[32m/usr/local/python/3.12.1/lib/python3.12/site-packages/pymysql/cursors.py:153[39m, in [36mCursor.execute[39m[34m(self, query, args)[39m
+[36mFile [39m[32m/workspaces/PSD/ecoli-env/lib/python3.12/site-packages/pymysql/cursors.py:153[39m, in [36mCursor.execute[39m[34m(self, query, args)[39m
 [32m    151[39m query = [38;5;28mself[39m.mogrify(query, args)
 [32m--> [39m[32m153[39m result = [38;5;28;43mself[39;49m[43m.[49m[43m_query[49m[43m([49m[43mquery[49m[43m)[49m
 [32m    154[39m [38;5;28mself[39m._executed = query
 
-[36mFile [39m[32m/usr/local/python/3.12.1/lib/python3.12/site-packages/pymysql/cursors.py:322[39m, in [36mCursor._query[39m[34m(self, q)[39m
+[36mFile [39m[32m/workspaces/PSD/ecoli-env/lib/python3.12/site-packages/pymysql/cursors.py:322[39m, in [36mCursor._query[39m[34m(self, q)[39m
 [32m    321[39m [38;5;28mself[39m._clear_result()
 [32m--> [39m[32m322[39m [43mconn[49m[43m.[49m[43mquery[49m[43m([49m[43mq[49m[43m)[49m
 [32m    323[39m [38;5;28mself[39m._do_get_result()
 
-[36mFile [39m[32m/usr/local/python/3.12.1/lib/python3.12/site-packages/pymysql/connections.py:575[39m, in [36mConnection.query[39m[34m(self, sql, unbuffered)[39m
+[36mFile [39m[32m/workspaces/PSD/ecoli-env/lib/python3.12/site-packages/pymysql/connections.py:575[39m, in [36mConnection.query[39m[34m(self, sql, unbuffered)[39m
 [32m    574[39m [38;5;28mself[39m._execute_command(COMMAND.COM_QUERY, sql)
 [32m--> [39m[32m575[39m [38;5;28mself[39m._affected_rows = [38;5;28;43mself[39;49m[43m.[49m[43m_read_query_result[49m[43m([49m[43munbuffered[49m[43m=[49m[43munbuffered[49m[43m)[49m
 [32m    576[39m [38;5;28;01mreturn[39;00m [38;5;28mself[39m._affected_rows
 
-[36mFile [39m[32m/usr/local/python/3.12.1/lib/python3.12/site-packages/pymysql/connections.py:826[39m, in [36mConnection._read_query_result[39m[34m(self, unbuffered)[39m
+[36mFile [39m[32m/workspaces/PSD/ecoli-env/lib/python3.12/site-packages/pymysql/connections.py:826[39m, in [36mConnection._read_query_result[39m[34m(self, unbuffered)[39m
 [32m    825[39m [38;5;28;01melse[39;00m:
 [32m--> [39m[32m826[39m     [43mresult[49m[43m.[49m[43mread[49m[43m([49m[43m)[49m
 [32m    827[39m [38;5;28mself[39m._result = result
 
-[36mFile [39m[32m/usr/local/python/3.12.1/lib/python3.12/site-packages/pymysql/connections.py:1203[39m, in [36mMySQLResult.read[39m[34m(self)[39m
+[36mFile [39m[32m/workspaces/PSD/ecoli-env/lib/python3.12/site-packages/pymysql/connections.py:1203[39m, in [36mMySQLResult.read[39m[34m(self)[39m
 [32m   1202[39m [38;5;28;01mtry[39;00m:
 [32m-> [39m[32m1203[39m     first_packet = [38;5;28;43mself[39;49m[43m.[49m[43mconnection[49m[43m.[49m[43m_read_packet[49m[43m([49m[43m)[49m
 [32m   1205[39m     [38;5;28;01mif[39;00m first_packet.is_ok_packet():
 
-[36mFile [39m[32m/usr/local/python/3.12.1/lib/python3.12/site-packages/pymysql/connections.py:782[39m, in [36mConnection._read_packet[39m[34m(self, packet_type)[39m
+[36mFile [39m[32m/workspaces/PSD/ecoli-env/lib/python3.12/site-packages/pymysql/connections.py:782[39m, in [36mConnection._read_packet[39m[34m(self, packet_type)[39m
 [32m    781[39m         [38;5;28mself[39m._result.unbuffered_active = [38;5;28;01mFalse[39;00m
 [32m--> [39m[32m782[39m     [43mpacket[49m[43m.[49m[43mraise_for_error[49m[43m([49m[43m)[49m
 [32m    783[39m [38;5;28;01mreturn[39;00m packet
 
-[36mFile [39m[32m/usr/local/python/3.12.1/lib/python3.12/site-packages/pymysql/protocol.py:219[39m, in [36mMysqlPacket.raise_for_error[39m[34m(self)[39m
+[36mFile [39m[32m/workspaces/PSD/ecoli-env/lib/python3.12/site-packages/pymysql/protocol.py:219[39m, in [36mMysqlPacket.raise_for_error[39m[34m(self)[39m
 [32m    218[39m     [38;5;28mprint[39m([33m"[39m[33merrno =[39m[33m"[39m, errno)
 [32m--> [39m[32m219[39m [43merr[49m[43m.[49m[43mraise_mysql_exception[49m[43m([49m[38;5;28;43mself[39;49m[43m.[49m[43m_data[49m[43m)[49m
 
-[36mFile [39m[32m/usr/local/python/3.12.1/lib/python3.12/site-packages/pymysql/err.py:150[39m, in [36mraise_mysql_exception[39m[34m(data)[39m
+[36mFile [39m[32m/workspaces/PSD/ecoli-env/lib/python3.12/site-packages/pymysql/err.py:150[39m, in [36mraise_mysql_exception[39m[34m(data)[39m
 [32m    149[39m     errorclass = InternalError [38;5;28;01mif[39;00m errno < [32m1000[39m [38;5;28;01melse[39;00m OperationalError
 [32m--> [39m[32m150[39m [38;5;28;01mraise[39;00m errorclass(errno, errval)
 
@@ -95,14 +95,16 @@ df.head()
 The above exception was the direct cause of the following exception:
 
 [31mProgrammingError[39m                          Traceback (most recent call last)
-[36mCell[39m[36m [39m[32mIn[2][39m[32m, line 5[39m
-[32m      2[39m engine = create_engine([33m"[39m[33mmysql+pymysql://root:Kunci_12345@127.0.0.1:3306/ecoli_db[39m[33m"[39m, pool_pre_ping=[38;5;28;01mTrue[39;00m)
-[32m      4[39m [38;5;66;03m# Ambil dataset dari tabel MySQL[39;00m
-[32m----> [39m[32m5[39m df = [43mpd[49m[43m.[49m[43mread_sql[49m[43m([49m[33;43m"[39;49m[33;43mSELECT * FROM ecoli[39;49m[33;43m"[39;49m[43m,[49m[43m [49m[43mengine[49m[43m)[49m
-[32m      7[39m [38;5;28mprint[39m([33m"[39m[33mJumlah baris:[39m[33m"[39m, [38;5;28mlen[39m(df))
-[32m      8[39m [38;5;28mprint[39m([33m"[39m[33mDistribusi kelas (asli):[39m[33m"[39m)
+[36mCell[39m[36m [39m[32mIn[3][39m[32m, line 6[39m
+[32m      1[39m engine = create_engine(
+[32m      2[39m     [33m"[39m[33mmysql+pymysql://root:Kunci_12345@127.0.0.1:3306/ecoli_db[39m[33m"[39m,
+[32m      3[39m     pool_pre_ping=[38;5;28;01mTrue[39;00m
+[32m      4[39m )
+[32m----> [39m[32m6[39m df = [43mpd[49m[43m.[49m[43mread_sql[49m[43m([49m[33;43m"[39;49m[33;43mSELECT * FROM ecoli[39;49m[33;43m"[39;49m[43m,[49m[43m [49m[43mengine[49m[43m)[49m
+[32m      7[39m [38;5;28mprint[39m([33m"[39m[33mData awal:[39m[33m"[39m)
+[32m      8[39m [38;5;28mprint[39m(df.head())
 
-[36mFile [39m[32m~/.local/lib/python3.12/site-packages/pandas/io/sql.py:736[39m, in [36mread_sql[39m[34m(sql, con, index_col, coerce_float, params, parse_dates, columns, chunksize, dtype_backend, dtype)[39m
+[36mFile [39m[32m/workspaces/PSD/ecoli-env/lib/python3.12/site-packages/pandas/io/sql.py:736[39m, in [36mread_sql[39m[34m(sql, con, index_col, coerce_float, params, parse_dates, columns, chunksize, dtype_backend, dtype)[39m
 [32m    726[39m     [38;5;28;01mreturn[39;00m pandas_sql.read_table(
 [32m    727[39m         sql,
 [32m    728[39m         index_col=index_col,
@@ -120,7 +122,7 @@ The above exception was the direct cause of the following exception:
 [32m    744[39m [43m        [49m[43mdtype[49m[43m=[49m[43mdtype[49m[43m,[49m
 [32m    745[39m [43m    [49m[43m)[49m
 
-[36mFile [39m[32m~/.local/lib/python3.12/site-packages/pandas/io/sql.py:1848[39m, in [36mSQLDatabase.read_query[39m[34m(self, sql, index_col, coerce_float, parse_dates, params, chunksize, dtype, dtype_backend)[39m
+[36mFile [39m[32m/workspaces/PSD/ecoli-env/lib/python3.12/site-packages/pandas/io/sql.py:1848[39m, in [36mSQLDatabase.read_query[39m[34m(self, sql, index_col, coerce_float, parse_dates, params, chunksize, dtype, dtype_backend)[39m
 [32m   1791[39m [38;5;28;01mdef[39;00m[38;5;250m [39m[34mread_query[39m(
 [32m   1792[39m     [38;5;28mself[39m,
 [32m   1793[39m     sql: [38;5;28mstr[39m,
@@ -135,13 +137,13 @@ The above exception was the direct cause of the following exception:
 [32m   1849[39m     columns = result.keys()
 [32m   1851[39m     [38;5;28;01mif[39;00m chunksize [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m:
 
-[36mFile [39m[32m~/.local/lib/python3.12/site-packages/pandas/io/sql.py:1671[39m, in [36mSQLDatabase.execute[39m[34m(self, sql, params)[39m
+[36mFile [39m[32m/workspaces/PSD/ecoli-env/lib/python3.12/site-packages/pandas/io/sql.py:1671[39m, in [36mSQLDatabase.execute[39m[34m(self, sql, params)[39m
 [32m   1669[39m args = [] [38;5;28;01mif[39;00m params [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m [38;5;28;01melse[39;00m [params]
 [32m   1670[39m [38;5;28;01mif[39;00m [38;5;28misinstance[39m(sql, [38;5;28mstr[39m):
 [32m-> [39m[32m1671[39m     [38;5;28;01mreturn[39;00m [38;5;28;43mself[39;49m[43m.[49m[43mcon[49m[43m.[49m[43mexec_driver_sql[49m[43m([49m[43msql[49m[43m,[49m[43m [49m[43m*[49m[43margs[49m[43m)[49m
 [32m   1672[39m [38;5;28;01mreturn[39;00m [38;5;28mself[39m.con.execute(sql, *args)
 
-[36mFile [39m[32m/usr/local/python/3.12.1/lib/python3.12/site-packages/sqlalchemy/engine/base.py:1779[39m, in [36mConnection.exec_driver_sql[39m[34m(self, statement, parameters, execution_options)[39m
+[36mFile [39m[32m/workspaces/PSD/ecoli-env/lib/python3.12/site-packages/sqlalchemy/engine/base.py:1779[39m, in [36mConnection.exec_driver_sql[39m[34m(self, statement, parameters, execution_options)[39m
 [32m   1774[39m execution_options = [38;5;28mself[39m._execution_options.merge_with(
 [32m   1775[39m     execution_options
 [32m   1776[39m )
@@ -157,14 +159,14 @@ The above exception was the direct cause of the following exception:
 [32m   1787[39m [43m[49m[43m)[49m
 [32m   1789[39m [38;5;28;01mreturn[39;00m ret
 
-[36mFile [39m[32m/usr/local/python/3.12.1/lib/python3.12/site-packages/sqlalchemy/engine/base.py:1846[39m, in [36mConnection._execute_context[39m[34m(self, dialect, constructor, statement, parameters, execution_options, *args, **kw)[39m
+[36mFile [39m[32m/workspaces/PSD/ecoli-env/lib/python3.12/site-packages/sqlalchemy/engine/base.py:1846[39m, in [36mConnection._execute_context[39m[34m(self, dialect, constructor, statement, parameters, execution_options, *args, **kw)[39m
 [32m   1844[39m     [38;5;28;01mreturn[39;00m [38;5;28mself[39m._exec_insertmany_context(dialect, context)
 [32m   1845[39m [38;5;28;01melse[39;00m:
 [32m-> [39m[32m1846[39m     [38;5;28;01mreturn[39;00m [38;5;28;43mself[39;49m[43m.[49m[43m_exec_single_context[49m[43m([49m
 [32m   1847[39m [43m        [49m[43mdialect[49m[43m,[49m[43m [49m[43mcontext[49m[43m,[49m[43m [49m[43mstatement[49m[43m,[49m[43m [49m[43mparameters[49m
 [32m   1848[39m [43m    [49m[43m)[49m
 
-[36mFile [39m[32m/usr/local/python/3.12.1/lib/python3.12/site-packages/sqlalchemy/engine/base.py:1986[39m, in [36mConnection._exec_single_context[39m[34m(self, dialect, context, statement, parameters)[39m
+[36mFile [39m[32m/workspaces/PSD/ecoli-env/lib/python3.12/site-packages/sqlalchemy/engine/base.py:1986[39m, in [36mConnection._exec_single_context[39m[34m(self, dialect, context, statement, parameters)[39m
 [32m   1983[39m     result = context._setup_result_proxy()
 [32m   1985[39m [38;5;28;01mexcept[39;00m [38;5;167;01mBaseException[39;00m [38;5;28;01mas[39;00m e:
 [32m-> [39m[32m1986[39m     [38;5;28;43mself[39;49m[43m.[49m[43m_handle_dbapi_exception[49m[43m([49m
@@ -172,14 +174,14 @@ The above exception was the direct cause of the following exception:
 [32m   1988[39m [43m    [49m[43m)[49m
 [32m   1990[39m [38;5;28;01mreturn[39;00m result
 
-[36mFile [39m[32m/usr/local/python/3.12.1/lib/python3.12/site-packages/sqlalchemy/engine/base.py:2355[39m, in [36mConnection._handle_dbapi_exception[39m[34m(self, e, statement, parameters, cursor, context, is_sub_exec)[39m
+[36mFile [39m[32m/workspaces/PSD/ecoli-env/lib/python3.12/site-packages/sqlalchemy/engine/base.py:2355[39m, in [36mConnection._handle_dbapi_exception[39m[34m(self, e, statement, parameters, cursor, context, is_sub_exec)[39m
 [32m   2353[39m [38;5;28;01melif[39;00m should_wrap:
 [32m   2354[39m     [38;5;28;01massert[39;00m sqlalchemy_exception [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m
 [32m-> [39m[32m2355[39m     [38;5;28;01mraise[39;00m sqlalchemy_exception.with_traceback(exc_info[[32m2[39m]) [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01me[39;00m
 [32m   2356[39m [38;5;28;01melse[39;00m:
 [32m   2357[39m     [38;5;28;01massert[39;00m exc_info[[32m1[39m] [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m
 
-[36mFile [39m[32m/usr/local/python/3.12.1/lib/python3.12/site-packages/sqlalchemy/engine/base.py:1967[39m, in [36mConnection._exec_single_context[39m[34m(self, dialect, context, statement, parameters)[39m
+[36mFile [39m[32m/workspaces/PSD/ecoli-env/lib/python3.12/site-packages/sqlalchemy/engine/base.py:1967[39m, in [36mConnection._exec_single_context[39m[34m(self, dialect, context, statement, parameters)[39m
 [32m   1965[39m                 [38;5;28;01mbreak[39;00m
 [32m   1966[39m     [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m evt_handled:
 [32m-> [39m[32m1967[39m         [38;5;28;43mself[39;49m[43m.[49m[43mdialect[49m[43m.[49m[43mdo_execute[49m[43m([49m
@@ -192,56 +194,56 @@ The above exception was the direct cause of the following exception:
 [32m   (...)[39m[32m   1978[39m         context.executemany,
 [32m   1979[39m     )
 
-[36mFile [39m[32m/usr/local/python/3.12.1/lib/python3.12/site-packages/sqlalchemy/engine/default.py:951[39m, in [36mDefaultDialect.do_execute[39m[34m(self, cursor, statement, parameters, context)[39m
+[36mFile [39m[32m/workspaces/PSD/ecoli-env/lib/python3.12/site-packages/sqlalchemy/engine/default.py:951[39m, in [36mDefaultDialect.do_execute[39m[34m(self, cursor, statement, parameters, context)[39m
 [32m    950[39m [38;5;28;01mdef[39;00m[38;5;250m [39m[34mdo_execute[39m([38;5;28mself[39m, cursor, statement, parameters, context=[38;5;28;01mNone[39;00m):
 [32m--> [39m[32m951[39m     [43mcursor[49m[43m.[49m[43mexecute[49m[43m([49m[43mstatement[49m[43m,[49m[43m [49m[43mparameters[49m[43m)[49m
 
-[36mFile [39m[32m/usr/local/python/3.12.1/lib/python3.12/site-packages/pymysql/cursors.py:153[39m, in [36mCursor.execute[39m[34m(self, query, args)[39m
+[36mFile [39m[32m/workspaces/PSD/ecoli-env/lib/python3.12/site-packages/pymysql/cursors.py:153[39m, in [36mCursor.execute[39m[34m(self, query, args)[39m
 [32m    149[39m     [38;5;28;01mpass[39;00m
 [32m    151[39m query = [38;5;28mself[39m.mogrify(query, args)
 [32m--> [39m[32m153[39m result = [38;5;28;43mself[39;49m[43m.[49m[43m_query[49m[43m([49m[43mquery[49m[43m)[49m
 [32m    154[39m [38;5;28mself[39m._executed = query
 [32m    155[39m [38;5;28;01mreturn[39;00m result
 
-[36mFile [39m[32m/usr/local/python/3.12.1/lib/python3.12/site-packages/pymysql/cursors.py:322[39m, in [36mCursor._query[39m[34m(self, q)[39m
+[36mFile [39m[32m/workspaces/PSD/ecoli-env/lib/python3.12/site-packages/pymysql/cursors.py:322[39m, in [36mCursor._query[39m[34m(self, q)[39m
 [32m    320[39m conn = [38;5;28mself[39m._get_db()
 [32m    321[39m [38;5;28mself[39m._clear_result()
 [32m--> [39m[32m322[39m [43mconn[49m[43m.[49m[43mquery[49m[43m([49m[43mq[49m[43m)[49m
 [32m    323[39m [38;5;28mself[39m._do_get_result()
 [32m    324[39m [38;5;28;01mreturn[39;00m [38;5;28mself[39m.rowcount
 
-[36mFile [39m[32m/usr/local/python/3.12.1/lib/python3.12/site-packages/pymysql/connections.py:575[39m, in [36mConnection.query[39m[34m(self, sql, unbuffered)[39m
+[36mFile [39m[32m/workspaces/PSD/ecoli-env/lib/python3.12/site-packages/pymysql/connections.py:575[39m, in [36mConnection.query[39m[34m(self, sql, unbuffered)[39m
 [32m    573[39m     sql = sql.encode([38;5;28mself[39m.encoding, [33m"[39m[33msurrogateescape[39m[33m"[39m)
 [32m    574[39m [38;5;28mself[39m._execute_command(COMMAND.COM_QUERY, sql)
 [32m--> [39m[32m575[39m [38;5;28mself[39m._affected_rows = [38;5;28;43mself[39;49m[43m.[49m[43m_read_query_result[49m[43m([49m[43munbuffered[49m[43m=[49m[43munbuffered[49m[43m)[49m
 [32m    576[39m [38;5;28;01mreturn[39;00m [38;5;28mself[39m._affected_rows
 
-[36mFile [39m[32m/usr/local/python/3.12.1/lib/python3.12/site-packages/pymysql/connections.py:826[39m, in [36mConnection._read_query_result[39m[34m(self, unbuffered)[39m
+[36mFile [39m[32m/workspaces/PSD/ecoli-env/lib/python3.12/site-packages/pymysql/connections.py:826[39m, in [36mConnection._read_query_result[39m[34m(self, unbuffered)[39m
 [32m    824[39m     result.init_unbuffered_query()
 [32m    825[39m [38;5;28;01melse[39;00m:
 [32m--> [39m[32m826[39m     [43mresult[49m[43m.[49m[43mread[49m[43m([49m[43m)[49m
 [32m    827[39m [38;5;28mself[39m._result = result
 [32m    828[39m [38;5;28;01mif[39;00m result.server_status [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m:
 
-[36mFile [39m[32m/usr/local/python/3.12.1/lib/python3.12/site-packages/pymysql/connections.py:1203[39m, in [36mMySQLResult.read[39m[34m(self)[39m
+[36mFile [39m[32m/workspaces/PSD/ecoli-env/lib/python3.12/site-packages/pymysql/connections.py:1203[39m, in [36mMySQLResult.read[39m[34m(self)[39m
 [32m   1201[39m [38;5;28;01mdef[39;00m[38;5;250m [39m[34mread[39m([38;5;28mself[39m):
 [32m   1202[39m     [38;5;28;01mtry[39;00m:
 [32m-> [39m[32m1203[39m         first_packet = [38;5;28;43mself[39;49m[43m.[49m[43mconnection[49m[43m.[49m[43m_read_packet[49m[43m([49m[43m)[49m
 [32m   1205[39m         [38;5;28;01mif[39;00m first_packet.is_ok_packet():
 [32m   1206[39m             [38;5;28mself[39m._read_ok_packet(first_packet)
 
-[36mFile [39m[32m/usr/local/python/3.12.1/lib/python3.12/site-packages/pymysql/connections.py:782[39m, in [36mConnection._read_packet[39m[34m(self, packet_type)[39m
+[36mFile [39m[32m/workspaces/PSD/ecoli-env/lib/python3.12/site-packages/pymysql/connections.py:782[39m, in [36mConnection._read_packet[39m[34m(self, packet_type)[39m
 [32m    780[39m     [38;5;28;01mif[39;00m [38;5;28mself[39m._result [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m [38;5;129;01mand[39;00m [38;5;28mself[39m._result.unbuffered_active [38;5;129;01mis[39;00m [38;5;28;01mTrue[39;00m:
 [32m    781[39m         [38;5;28mself[39m._result.unbuffered_active = [38;5;28;01mFalse[39;00m
 [32m--> [39m[32m782[39m     [43mpacket[49m[43m.[49m[43mraise_for_error[49m[43m([49m[43m)[49m
 [32m    783[39m [38;5;28;01mreturn[39;00m packet
 
-[36mFile [39m[32m/usr/local/python/3.12.1/lib/python3.12/site-packages/pymysql/protocol.py:219[39m, in [36mMysqlPacket.raise_for_error[39m[34m(self)[39m
+[36mFile [39m[32m/workspaces/PSD/ecoli-env/lib/python3.12/site-packages/pymysql/protocol.py:219[39m, in [36mMysqlPacket.raise_for_error[39m[34m(self)[39m
 [32m    217[39m [38;5;28;01mif[39;00m DEBUG:
 [32m    218[39m     [38;5;28mprint[39m([33m"[39m[33merrno =[39m[33m"[39m, errno)
 [32m--> [39m[32m219[39m [43merr[49m[43m.[49m[43mraise_mysql_exception[49m[43m([49m[38;5;28;43mself[39;49m[43m.[49m[43m_data[49m[43m)[49m
 
-[36mFile [39m[32m/usr/local/python/3.12.1/lib/python3.12/site-packages/pymysql/err.py:150[39m, in [36mraise_mysql_exception[39m[34m(data)[39m
+[36mFile [39m[32m/workspaces/PSD/ecoli-env/lib/python3.12/site-packages/pymysql/err.py:150[39m, in [36mraise_mysql_exception[39m[34m(data)[39m
 [32m    148[39m [38;5;28;01mif[39;00m errorclass [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m:
 [32m    149[39m     errorclass = InternalError [38;5;28;01mif[39;00m errno < [32m1000[39m [38;5;28;01melse[39;00m OperationalError
 [32m--> [39m[32m150[39m [38;5;28;01mraise[39;00m errorclass(errno, errval)
