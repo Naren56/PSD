@@ -191,6 +191,8 @@
 
 <li class="toctree-l1"><a class="reference internal" href="classifier.html">KLASIFIKASI NAIVE BAYES, RF, BAGGING</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">KNIME</a></li>
+
+
 </ul>
 
     </div>
@@ -363,7 +365,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -379,6 +383,17 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">KNIME</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-ecoli">Data Ecoli</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-iris">Data Iris</a></li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -390,6 +405,9 @@ document.write(`
                   
   <section id="knime">
 <h1>KNIME<a class="headerlink" href="#knime" title="Link to this heading">#</a></h1>
+</section>
+<section id="data-ecoli">
+<h1>Data Ecoli<a class="headerlink" href="#data-ecoli" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
@@ -402,7 +420,156 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;Data/KNIME.csv&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;Data/ecoli.csv&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sequence_name</th>
+      <th>mcg</th>
+      <th>gvh</th>
+      <th>lip</th>
+      <th>chg</th>
+      <th>aac</th>
+      <th>alm1</th>
+      <th>alm2</th>
+      <th>class</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>AAT_ECOLI</td>
+      <td>0.49</td>
+      <td>0.29</td>
+      <td>0.48</td>
+      <td>0.5</td>
+      <td>0.56</td>
+      <td>0.24</td>
+      <td>0.35</td>
+      <td>cp</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>ACEA_ECOLI</td>
+      <td>0.07</td>
+      <td>0.40</td>
+      <td>0.48</td>
+      <td>0.5</td>
+      <td>0.54</td>
+      <td>0.35</td>
+      <td>0.44</td>
+      <td>cp</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>ACEK_ECOLI</td>
+      <td>0.56</td>
+      <td>0.40</td>
+      <td>0.48</td>
+      <td>0.5</td>
+      <td>0.49</td>
+      <td>0.37</td>
+      <td>0.46</td>
+      <td>cp</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>ACKA_ECOLI</td>
+      <td>0.59</td>
+      <td>0.49</td>
+      <td>0.48</td>
+      <td>0.5</td>
+      <td>0.52</td>
+      <td>0.45</td>
+      <td>0.36</td>
+      <td>cp</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>ADI_ECOLI</td>
+      <td>0.23</td>
+      <td>0.32</td>
+      <td>0.48</td>
+      <td>0.5</td>
+      <td>0.55</td>
+      <td>0.25</td>
+      <td>0.35</td>
+      <td>cp</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.image</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpimg</span>
+
+<span class="c1"># === 1️⃣ Baca tiga gambar dari folder Data ===</span>
+<span class="n">img1</span> <span class="o">=</span> <span class="n">mpimg</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;Data/KNIME-ecoli.png&quot;</span><span class="p">)</span>                <span class="c1"># Gambar utama di atas</span>
+<span class="n">img2</span> <span class="o">=</span> <span class="n">mpimg</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;Data/Bar-Chart-KNIME.png&quot;</span><span class="p">)</span>      <span class="c1"># Gambar tengah</span>
+<span class="n">img3</span> <span class="o">=</span> <span class="n">mpimg</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;Data/Scatter-Plot-KNIME.png&quot;</span><span class="p">)</span>   <span class="c1"># Gambar bawah</span>
+
+<span class="c1"># === 2️⃣ Buat figure besar dan jelas ===</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>  <span class="c1"># bisa ubah ke (14, 24) kalau mau lebih besar</span>
+
+<span class="c1"># === 3️⃣ Gambar 1: KNIME.png (atas) ===</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Tampilan Workflow di KNIME&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="c1"># === 4️⃣ Gambar 2: Bar Chart (tengah) ===</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Bar Chart dari KNIME&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="c1"># === 5️⃣ Gambar 3: Scatter Plot (bawah) ===</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Scatter Plot dari KNIME&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="c1"># === 6️⃣ Judul besar di atas semua gambar ===</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Hasil Visualisasi Lengkap dari KNIME&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">22</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.995</span><span class="p">)</span>
+
+<span class="c1"># === 7️⃣ Tata letak agar proporsional ===</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">rect</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.96</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/53176b594474d6bdafa8d9946651eb2a95d1dfdf79eeef78ac849b4ce6f85382.png" src="_images/53176b594474d6bdafa8d9946651eb2a95d1dfdf79eeef78ac849b4ce6f85382.png" />
+</div>
+</div>
+</section>
+<section id="data-iris">
+<h1>Data Iris<a class="headerlink" href="#data-iris" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;Data/KNIME-iris.csv&quot;</span><span class="p">)</span>
 <span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -480,19 +647,11 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img_path</span> <span class="o">=</span> <span class="s2">&quot;Data/Bar_Chart_KNIME.png&quot;</span>
-<span class="n">img_path</span> <span class="o">=</span> <span class="s2">&quot;Data/Scatter_Plot_KNIME.png&quot;</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.image</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpimg</span>
 
 <span class="c1"># === 1️⃣ Baca tiga gambar dari folder Data ===</span>
-<span class="n">img1</span> <span class="o">=</span> <span class="n">mpimg</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;Data/KNIME.png&quot;</span><span class="p">)</span>                <span class="c1"># Gambar utama di atas</span>
+<span class="n">img1</span> <span class="o">=</span> <span class="n">mpimg</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;Data/KNIME-iris.png&quot;</span><span class="p">)</span>                <span class="c1"># Gambar utama di atas</span>
 <span class="n">img2</span> <span class="o">=</span> <span class="n">mpimg</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;Data/Bar_Chart_KNIME.png&quot;</span><span class="p">)</span>      <span class="c1"># Gambar tengah</span>
 <span class="n">img3</span> <span class="o">=</span> <span class="n">mpimg</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;Data/Scatter_Plot_KNIME.png&quot;</span><span class="p">)</span>   <span class="c1"># Gambar bawah</span>
 
@@ -577,6 +736,24 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">KNIME</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-ecoli">Data Ecoli</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-iris">Data Iris</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
               
             
           </div>
